@@ -1,2 +1,14 @@
 # To-Do-List
-To-Do-List is a programming project coded in C Language which includes User Management, Authorization and the core logic of a To-Do-List.
+A programming project coded in C Language which includes User Management, Authorization
+and the core logic of a To-Do-List.
+
+## Functionality
+On compiling the program, we get 2 options, to :
+1. Login
+2. Register
+
+When the users login to their account, they get the option to create a 
+To-Do-List by adding tasks one by one.
+
+Also, the tasks can be marked as completed when needed and removed
+from the List.
