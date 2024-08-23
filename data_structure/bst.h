@@ -1,0 +1,17 @@
+typedef struct userData userData;
+
+typedef struct TreeNode TreeNode;
+
+TreeNode* init_node();
+
+TreeNode* insert_data(TreeNode* root, userData* data);
+
+void freeTree(TreeNode* root);
+
+userData* set_data(char* username, char* password);
+
+char* getUsername(userData* data);
+
+char* getPassword(userData* data);
+
+void getInorder(TreeNode* root);
