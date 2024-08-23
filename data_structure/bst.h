@@ -4,11 +4,7 @@ typedef struct userData userData;
 
 typedef struct TreeNode TreeNode;
 
-void init_node(TreeNode* node);
-
 TreeNode* insert_data(TreeNode* root, userData* data);
-
-void insertion(userData* data);
 
 void freeTree(TreeNode* root);
 
@@ -18,6 +14,6 @@ char* getUsername(userData* data);
 
 char* getPassword(userData* data);
 
-void getInorder();
+void getInorder(TreeNode* root);
 
-bool search(char* username);
+bool search(TreeNode* root, char* username);

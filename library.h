@@ -11,3 +11,5 @@ void login_user();
 void init_user_session(); 
 
 bool exists_user(char* username);
+
+void load_data();

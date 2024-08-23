@@ -5,9 +5,11 @@
 #include <string.h>
 
 typedef struct userData userData;
+TreeNode* root = NULL;
 
 bool exists_user(char* username){
-    return 0;
+    if(search(root, username)) return true;
+    return false;
 }
 
 void login_user(){
@@ -29,12 +31,14 @@ void register_user(){
         printf("Sorry, this username is already taken, please try another combination\n");
         printf("Enter 'e' if you wish to exit\n");
         printf("\nUsername : ");
-        scanf("%s, username");
+        scanf("%s", username);
     }
     printf("Password : ");
     scanf("%s", password);
     FILE* cred = fopen("credentials.txt", "a");
     fprintf(cred, "%s,%s\n", username, password);
+    userData* data = set_data(username, password);
+    root = insert_data(root, data);
     fclose(cred);
 }
 
@@ -48,10 +52,11 @@ void init_program(){
     while(fgets(line, sizeof(line), cred)){
         sscanf(line, "%[^,],%s", username, password);
         userData* data = set_data(username, password);
-        insertion(data);
+        root = insert_data(root, data);
     }
 
-    getInorder();
+    getInorder(root);
+
 
     printf("Welcome to your Personalized Progress Tracker, how do you want to proceed\n");
     printf("Enter 's' to sign-in\n");
@@ -73,3 +78,6 @@ void init_user_session(){
 
 }
 
+void load_data(){
+    
+}

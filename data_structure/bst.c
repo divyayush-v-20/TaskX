@@ -34,33 +34,29 @@ struct TreeNode{
 
 typedef struct TreeNode TreeNode;
 
-TreeNode* root = NULL;
-
-void init_node(TreeNode* node){
-    node = (TreeNode *)malloc(sizeof(TreeNode));
-    node -> val = NULL;
-    node -> left = NULL;
-    node -> right = NULL;
-}
 
 TreeNode* insert_data(TreeNode* root, userData* data){
     if(!root){
         TreeNode* newNode;
-        init_node(newNode);
+        newNode -> left = NULL;
+        newNode -> right = NULL;
         newNode -> val = data;
         return newNode;
     }
-    if(strcmp(root -> val -> username, data -> username) > 0){
+    int cmp = strcmp(root -> val -> username, data -> username);
+    if(cmp > 0){
         root -> left = insert_data(root -> left, data);
     }
-    else{
+    else if(cmp < 0){
         root -> right = insert_data(root -> right, data);
     }
+    else{
+        printf("Duplicate username found: %s\n", data->username);
+        free(data->username);
+        free(data->password);
+        free(data);
+    }
     return root;
-}
-
-void insertion(userData* data){
-    root = insert_data(root, data);
 }
 
 void freeTree(TreeNode* root){
@@ -75,14 +71,14 @@ void freeTree(TreeNode* root){
     return;
 }
 
-void getInorder(){
+void getInorder(TreeNode* root){
     if(!root) return;
     getInorder(root -> left);
     printf("%s ", root -> val -> username);
     getInorder(root -> right);
 }
 
-bool search(char* username){
+bool search(TreeNode* root, char* username){
     while(root){
         if(strcmp(root -> val -> username, username) == 0) return true;
         else if(strcmp(root -> val -> username, username) > 0) root = root -> left;
