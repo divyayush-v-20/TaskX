@@ -1,10 +1,14 @@
+#include <stdbool.h>
+
 typedef struct userData userData;
 
 typedef struct TreeNode TreeNode;
 
-TreeNode* init_node();
+void init_node(TreeNode* node);
 
 TreeNode* insert_data(TreeNode* root, userData* data);
+
+void insertion(userData* data);
 
 void freeTree(TreeNode* root);
 
@@ -14,4 +18,6 @@ char* getUsername(userData* data);
 
 char* getPassword(userData* data);
 
-void getInorder(TreeNode* root);
+void getInorder();
+
+bool search(char* username);

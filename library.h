@@ -4,8 +4,10 @@ typedef struct userData userData;
 
 void init_program();
 
-void register_user(const char* fileName, const char* username, const char* password);
+void register_user();
 
-bool verify_login(const char* username, const char* password);
+void login_user();
 
-void init_user_session();
+void init_user_session(); 
+
+bool exists_user(char* username);
