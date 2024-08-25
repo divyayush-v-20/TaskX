@@ -37,7 +37,7 @@ typedef struct TreeNode TreeNode;
 
 TreeNode* insert_data(TreeNode* root, userData* data){
     if(!root){
-        TreeNode* newNode;
+        TreeNode* newNode = (TreeNode*)malloc(sizeof(TreeNode));
         newNode -> left = NULL;
         newNode -> right = NULL;
         newNode -> val = data;
@@ -51,9 +51,9 @@ TreeNode* insert_data(TreeNode* root, userData* data){
         root -> right = insert_data(root -> right, data);
     }
     else{
-        printf("Duplicate username found: %s\n", data->username);
-        free(data->username);
-        free(data->password);
+        printf("Duplicate username found: %s\n", data -> username);
+        free(data -> username);
+        free(data -> password);
         free(data);
     }
     return root;
