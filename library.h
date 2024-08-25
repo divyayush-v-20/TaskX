@@ -13,3 +13,7 @@ void init_user_session();
 bool exists_user(char* username);
 
 void load_data();
+
+bool validate_password(char* password);
+
+void remove_newline(char* str);
