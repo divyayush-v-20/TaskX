@@ -1,6 +1,6 @@
-# Progress Tracker
-A CLI based Progress Tracker coded in C Language including User Management, Authorization
-and the core logic of a Progress Tracker.
+# TaskX
+A CLI based User Task Planner coded in C Language including User Management, Authorization
+and the core logic of a Task Planner.
 
 ## Functionality
 On compiling the program, we get 2 options, to :
@@ -13,9 +13,6 @@ add tasks to their list one by one.
 
 Also, the tasks can be marked as completed when needed and removed
 from the List.
-
-User will be shown their measure of Productivity on the basis of the times of 
-task addition and completion.
 
 New Users can register on the Platform by providing a unique username and a password.
 
