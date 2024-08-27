@@ -17,3 +17,5 @@ char* getPassword(userData* data);
 void getInorder(TreeNode* root);
 
 bool search(TreeNode* root, char* username);
+
+userData* get_node_data(TreeNode* root, char* username);
