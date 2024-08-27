@@ -86,3 +86,12 @@ bool search(TreeNode* root, char* username){
     }
     return false;
 }
+
+userData* get_node_data(TreeNode* root, char* username){
+    while(root){
+        if(strcmp(root -> val -> username, username) == 0) return root -> val;
+        else if(strcmp(root -> val -> username, username) > 0) root = root -> left;
+        else root = root -> right;
+    }
+    return NULL;
+}

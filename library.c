@@ -8,6 +8,11 @@
 typedef struct userData userData;
 TreeNode* root = NULL;
 
+struct userData{
+    char* username;
+    char* password;
+};
+
 void remove_newline(char* str) {
     char* newline_pos = strchr(str, '\n');
     if (newline_pos) {
@@ -41,7 +46,28 @@ bool validate_password(char* password){
 }
 
 void login_user(){
-
+    printf("Enter your Username and Password to Login\n\n");
+    char username[50];
+    char password[20];
+    printf("Username : ");
+    scanf("%s", username);
+    userData* data = get_node_data(root, username);
+    if(data == NULL){
+        printf("The username you entered is not valid, try again\n");
+        // printf("Enter 't' to try again, or 'r' if you wish to register\n");
+        login_user();
+    }
+    else{
+        char password[20];
+        printf("Password : ");
+        scanf("%s", password);
+        while(strcmp(password, data -> password) != 0){
+            printf("Incorrect Password\n");
+            printf("Re-Enter Password\n");
+            scanf("%s", password);
+        }
+        init_user_session(username);
+    }
 }
 
 void register_user(){
@@ -110,8 +136,8 @@ void init_program(){
     }
 }
 
-void init_user_session(){
-
+void init_user_session(char* username){
+    printf("Welcome %s", username);
 }
 
 void load_data(){

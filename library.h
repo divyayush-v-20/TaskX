@@ -8,7 +8,7 @@ void register_user();
 
 void login_user();
 
-void init_user_session(); 
+void init_user_session(char* username); 
 
 bool exists_user(char* username);
 
