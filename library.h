@@ -17,3 +17,6 @@ void load_data();
 bool validate_password(char* password);
 
 void remove_newline(char* str);
+
+char* get_username();
+

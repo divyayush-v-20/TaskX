@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <conio.h>
 
 typedef struct userData userData;
 TreeNode* root = NULL;
@@ -12,6 +13,13 @@ struct userData{
     char* username;
     char* password;
 };
+
+bool isValidUsername(char* input){
+    for(int i = 0; i < strlen(input); i++){
+        if(input[i] == ' ') return false;
+    }
+    return true;
+}
 
 void remove_newline(char* str) {
     char* newline_pos = strchr(str, '\n');
@@ -51,6 +59,7 @@ void login_user(){
     char password[20];
     printf("Username : ");
     scanf("%s", username);
+    getchar();
     userData* data = get_node_data(root, username);
     if(data == NULL){
         printf("The username you entered is not valid, try again\n");
@@ -80,7 +89,16 @@ void register_user(){
     printf("Password must contain an Uppercase, Lowercase, Numeric value and special chracters\n");
     printf("[Password should have atleast 8 characters]\n[Password should not exceed 20 characters]\n");
     printf("\nUsername : ");
-    scanf("%s", username);
+    scanf("%[^\n]", username);
+    getchar();
+    // printf("%s", username);
+
+    while(!isValidUsername(username)){
+        printf("Username cannot contain spaces, please re-enter your username.\n");
+        printf("Username : ");
+        scanf("%[^\n]", username);
+        getchar();
+    }
 
     while(exists_user(username)){
         printf("Sorry, this username is already taken, please try another combination\n");
@@ -90,7 +108,14 @@ void register_user(){
     }
     
     printf("Password : ");
-    scanf("%s", password);
+    scanf("%[^\n]", password);
+    getchar();
+    while(!isValidUsername(password)){
+        printf("Password cannot contain spaces, please re-enter your password.\n");
+        printf("Password : ");
+        scanf("%[^\n]", password);
+        getchar();
+    }
     while(!validate_password(password)){
         printf("The password you entered does not match the security requirements\nEnter a new password with all the given constraints\n");
         printf("Password : ");
@@ -127,6 +152,7 @@ void init_program(){
     char op;
     printf("Write Here : ");
     scanf("%c", &op);
+    getchar();
     if(op == 'e' || op == 'E') return;
     else if(op == 'r' || op == 'R'){
         register_user();
