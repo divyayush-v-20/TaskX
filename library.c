@@ -73,6 +73,7 @@ void login_user(){
         while(strcmp(password, data -> password) != 0){
             printf("Incorrect Password\n");
             printf("Re-Enter Password\n");
+            printf("Password : ");
             scanf("%s", password);
         }
         init_user_session(username);
