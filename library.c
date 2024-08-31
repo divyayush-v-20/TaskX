@@ -6,6 +6,25 @@
 #include <string.h>
 #include <conio.h>
 
+void disable_echo() {
+    HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE); 
+    DWORD mode;
+
+    GetConsoleMode(hStdin, &mode);
+
+    SetConsoleMode(hStdin, mode & ~(ENABLE_ECHO_INPUT));
+}
+
+void enable_echo() {
+    HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE); 
+    DWORD mode;
+
+    GetConsoleMode(hStdin, &mode);
+
+    SetConsoleMode(hStdin, mode | ENABLE_ECHO_INPUT);
+}
+
+
 typedef struct userData userData;
 TreeNode* root = NULL;
 
@@ -18,8 +37,11 @@ bool isValidUsername(char* input){
     for(int i = 0; i < strlen(input); i++){
         if(input[i] == ' ') return false;
     }
+    // int len = strlen(input);
     return true;
 }
+
+
 
 void remove_newline(char* str) {
     char* newline_pos = strchr(str, '\n');
@@ -45,6 +67,7 @@ bool validate_password(char* password){
     }
     if(len > 20 || len < 8) return false;
     for(int i = 0; i < len; i++){
+        if(password[i] == ' ') return false;
         if(password[i] >= 'a' && password[i] <= 'z') noLowerCase = 0;
         if(password[i] >= 'A' && password[i] <= 'Z') noUpperCase = 0;
         if(password[i] >= '0' && password[i] <= '9') noNum = 0;
@@ -69,15 +92,23 @@ void login_user(){
     else{
         char password[20];
         printf("Password : ");
+        disable_echo();
         scanf("%s", password);
+        enable_echo();
         while(strcmp(password, data -> password) != 0){
             printf("Incorrect Password\n");
             printf("Re-Enter Password\n");
             printf("Password : ");
+            disable_echo();
             scanf("%s", password);
+            enable_echo();
         }
         init_user_session(username);
     }
+}
+
+char* get_password(){
+
 }
 
 void register_user(){
@@ -107,21 +138,28 @@ void register_user(){
         printf("\nUsername : ");
         scanf("%s", username);
     }
-    
+    disable_echo();
     printf("Password : ");
     scanf("%[^\n]", password);
     getchar();
-    while(!isValidUsername(password)){
-        printf("Password cannot contain spaces, please re-enter your password.\n");
-        printf("Password : ");
-        scanf("%[^\n]", password);
-        getchar();
-    }
+    enable_echo();
+    // while(!validate_password(password)){
+    //     printf("Password cannot contain spaces, please re-enter your password.\n");
+    //     printf("Password : ");
+    //     scanf("%[^\n]", password);
+    //     getchar();
+    // }
     while(!validate_password(password)){
         printf("The password you entered does not match the security requirements\nEnter a new password with all the given constraints\n");
         printf("Password : ");
-        scanf("%s", password);
+        disable_echo();
+        scanf("%[^\n]", password);
+        getchar();
+        enable_echo();
     }
+    // char* confirm_password;
+    // scanf("%[^\n]", confirm_password);
+    
     FILE* cred = fopen("credentials.txt", "a");
     fprintf(cred, "%s,%s\n", username, password);
     userData* data = set_data(username, password);
@@ -164,7 +202,7 @@ void init_program(){
 }
 
 void init_user_session(char* username){
-    printf("Welcome %s", username);
+    printf("\n\nWelcome %s", username);
 }
 
 void load_data(){

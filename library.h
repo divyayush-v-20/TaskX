@@ -1,4 +1,9 @@
 #include <stdbool.h>
+#include <windows.h>
+
+void disable_echo();
+
+void enable_echo();
 
 typedef struct userData userData;
 
