@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <conio.h>
+#include "tasks.h"
 
 void disable_echo() {
     HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE); 
@@ -103,7 +104,7 @@ void login_user(){
             scanf("%s", password);
             enable_echo();
         }
-        init_user_session(username);
+        welcome_user(username);
     }
 }
 
@@ -155,16 +156,19 @@ void register_user(){
         enable_echo();
     }
     
+    //adding the credentials to credentials.txt
     FILE* cred = fopen("credentials.txt", "a");
     fprintf(cred, "%s,%s\n", username, password);
     userData* data = set_data(username, password);
     root = insert_data(root, data);
     fclose(cred);
+
+    //creating a txt file for each user
     const char* folder_name = "user_files";
     // const char* file_name = ("%s.txt", username);
     char path[256];
     snprintf(path, sizeof(path), "%s/%s.txt", folder_name, username);
-    FILE* user_file = fopen(path, "w");
+    FILE* user_file = fopen(path, "a");
     if(user_file == NULL){
         perror("Error creating user file\n");
         return;
@@ -190,7 +194,7 @@ void init_program(){
     // printf("\n");
 
 
-    printf("Welcome to your Personalized Progress Tracker, how do you want to proceed\n");
+    printf("Welcome to your Personalized Task Planner, how do you want to proceed\n");
     printf("Enter 's' to sign-in\n");
     printf("Enter 'r' to sign-up\n");
     printf("Enter 'e' to exit\n");
@@ -207,10 +211,3 @@ void init_program(){
     }
 }
 
-void init_user_session(char* username){
-    printf("\nWelcome %s", username);
-}
-
-void load_data(){
-    
-}
