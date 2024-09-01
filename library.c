@@ -107,9 +107,6 @@ void login_user(){
     }
 }
 
-char* get_password(){
-
-}
 
 void register_user(){
     char username[50];
@@ -138,17 +135,17 @@ void register_user(){
         printf("\nUsername : ");
         scanf("%s", username);
     }
-    disable_echo();
     printf("Password : ");
+    disable_echo();
     scanf("%[^\n]", password);
     getchar();
     enable_echo();
-    // while(!validate_password(password)){
-    //     printf("Password cannot contain spaces, please re-enter your password.\n");
-    //     printf("Password : ");
-    //     scanf("%[^\n]", password);
-    //     getchar();
-    // }
+    while(!validate_password(password)){
+        printf("Password cannot contain spaces, please re-enter your password.\n");
+        printf("Password : ");
+        scanf("%[^\n]", password);
+        getchar();
+    }
     while(!validate_password(password)){
         printf("The password you entered does not match the security requirements\nEnter a new password with all the given constraints\n");
         printf("Password : ");
@@ -157,14 +154,23 @@ void register_user(){
         getchar();
         enable_echo();
     }
-    // char* confirm_password;
-    // scanf("%[^\n]", confirm_password);
     
     FILE* cred = fopen("credentials.txt", "a");
     fprintf(cred, "%s,%s\n", username, password);
     userData* data = set_data(username, password);
     root = insert_data(root, data);
     fclose(cred);
+    const char* folder_name = "user_files";
+    // const char* file_name = ("%s.txt", username);
+    char path[256];
+    snprintf(path, sizeof(path), "%s/%s.txt", folder_name, username);
+    FILE* user_file = fopen(path, "w");
+    if(user_file == NULL){
+        perror("Error creating user file\n");
+        return;
+    }
+    fclose(user_file);
+
 }
 
 
@@ -202,7 +208,7 @@ void init_program(){
 }
 
 void init_user_session(char* username){
-    printf("\n\nWelcome %s", username);
+    printf("\nWelcome %s", username);
 }
 
 void load_data(){
