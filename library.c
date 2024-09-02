@@ -79,8 +79,8 @@ bool validate_password(char* password){
 
 void login_user(){
     printf("Enter your Username and Password to Login\n\n");
-    char username[50];
-    char password[20];
+    char* username = (char*)malloc(20);
+    char* password = (char*)malloc(20);
     printf("Username : ");
     scanf("%s", username);
     getchar();
@@ -91,7 +91,7 @@ void login_user(){
         login_user();
     }
     else{
-        char password[20];
+        // char password[20];
         printf("Password : ");
         disable_echo();
         scanf("%s", password);
@@ -106,12 +106,14 @@ void login_user(){
         }
         welcome_user(username);
     }
+    free(username);
+    free(password);
 }
 
 
 void register_user(){
-    char username[50];
-    char password[20];
+    char* username = (char*)malloc(50);
+    char* password = (char*)malloc(50);
 
     printf("\nEnter your username and password to register.\n\n");
     printf("[Note : username can contain Alphanumeric characters, numbers, special characters]\n");
@@ -141,12 +143,12 @@ void register_user(){
     scanf("%[^\n]", password);
     getchar();
     enable_echo();
-    while(!validate_password(password)){
-        printf("Password cannot contain spaces, please re-enter your password.\n");
-        printf("Password : ");
-        scanf("%[^\n]", password);
-        getchar();
-    }
+    // while(!validate_password(password)){
+    //     printf("Password cannot contain spaces, please re-enter your password.\n");
+    //     printf("Password : ");
+    //     scanf("%[^\n]", password);
+    //     getchar();
+    // }
     while(!validate_password(password)){
         printf("The password you entered does not match the security requirements\nEnter a new password with all the given constraints\n");
         printf("Password : ");
@@ -174,23 +176,27 @@ void register_user(){
         return;
     }
     fclose(user_file);
-
+    free(username);
+    free(password);
 }
 
 
 void init_program(){
 
     char line[71];
-    char username[50];
-    char password[20];
+    char* username = (char*)malloc(20);
+    char* password = (char*)malloc(20);
     FILE* cred = fopen("credentials.txt", "r");
+    userData* data = NULL;
     while(fgets(line, sizeof(line), cred)){
         sscanf(line, "%[^,],%s", username, password);
-        userData* data = set_data(username, password);
+        data = set_data(username, password);
         root = insert_data(root, data);
     }
 
-    // getInorder(root);
+    free(data);
+
+    getInorder(root);
     // printf("\n");
 
 
@@ -209,5 +215,7 @@ void init_program(){
     else if(op == 's' || op == 'S'){
         login_user();
     }
+    free(username);
+    free(password);
 }
 

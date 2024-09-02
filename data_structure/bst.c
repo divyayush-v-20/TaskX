@@ -74,7 +74,7 @@ void freeTree(TreeNode* root){
 void getInorder(TreeNode* root){
     if(!root) return;
     getInorder(root -> left);
-    printf("%s ", root -> val -> username);
+    printf("%s\n", root -> val -> username);
     getInorder(root -> right);
 }
 
