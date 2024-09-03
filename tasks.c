@@ -1,4 +1,5 @@
 #include "tasks.h"
+#include "library.h"
 #include <stdio.h>
 
 void welcome_user(char* username){

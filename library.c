@@ -179,11 +179,13 @@ void register_user(){
     char op;
     printf("Enter here : ");
     scanf("%c", &op);
-    // while(op != 's' || op != 'e'){
-    //     printf("\nInvalid input, enter again\n");
-    //     printf("\nEnter Here : ");
-    //     scanf("%c", &op);
-    // }
+    getchar();
+    while(op != 's' && op != 'e'){
+        printf("\nInvalid input, enter again\n");
+        printf("\nEnter Here : ");
+        scanf("%c", &op);
+        getchar();
+    }
     if(op == 's') login_user();
     if(op == 'e') return;
     else{
@@ -222,7 +224,15 @@ void init_program(){
     printf("Write Here : ");
     scanf("%c", &op);
     getchar();
-    if(op == 'e' || op == 'E') return;
+    while(op != 's' && op != 'r' && op != 'e'){
+        printf("\nInvalid option, re-enter : ");
+        scanf("%c", &op);
+        getchar();
+    }
+    if(op == 'e' || op == 'E') {
+        printf("\nProgram Terminating...");
+        return;
+    }
     else if(op == 'r' || op == 'R'){
         register_user();
     }
