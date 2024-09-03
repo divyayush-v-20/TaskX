@@ -42,8 +42,6 @@ bool isValidUsername(char* input){
     return true;
 }
 
-
-
 void remove_newline(char* str) {
     char* newline_pos = strchr(str, '\n');
     if (newline_pos) {
@@ -175,6 +173,22 @@ void register_user(){
         perror("Error creating user file\n");
         return;
     }
+    printf("\nDo you wish to sign in or exit ?\n");
+    printf("Enter 's' to sign in\n");
+    printf("Enter 'e' to exit\n");
+    char op;
+    printf("Enter here : ");
+    scanf("%c", &op);
+    // while(op != 's' || op != 'e'){
+    //     printf("\nInvalid input, enter again\n");
+    //     printf("\nEnter Here : ");
+    //     scanf("%c", &op);
+    // }
+    if(op == 's') login_user();
+    if(op == 'e') return;
+    else{
+        return;
+    }
     fclose(user_file);
     free(username);
     free(password);
@@ -196,7 +210,7 @@ void init_program(){
 
     free(data);
 
-    getInorder(root);
+    // getInorder(root);
     // printf("\n");
 
 
@@ -218,4 +232,3 @@ void init_program(){
     free(username);
     free(password);
 }
-
