@@ -77,7 +77,7 @@ bool validate_password(char* password){
 }
 
 void login_user(){
-    printf("Enter your Username and Password to Login\n\n");
+    printf("\nEnter your Username and Password to Login\n\n");
     char* username = (char*)malloc(20);
     char* password = (char*)malloc(20);
     printf("Username : ");
@@ -214,19 +214,19 @@ void init_program(){
         // fprintf(new_cred, "%s,%s\n", encode(username), encode(password));
         root = insert_data(root, data);
     }
-    getInorder(root);
+    // getInorder(root);
     free(data);
 
     // getInorder(root);
     // printf("\n");
 
 
-    printf("Welcome to your Personalized Task Planner, how do you want to proceed\n");
+    printf("\n\nWelcome to your Personalized Task Planner, how do you want to proceed\n");
     printf("Enter 's' to sign-in\n");
     printf("Enter 'r' to sign-up\n");
     printf("Enter 'e' to exit\n");
     char op;
-    printf("Write Here : ");
+    printf("\nEnter Here : ");
     scanf("%c", &op);
     getchar();
     while(op != 's' && op != 'r' && op != 'e'){
