@@ -1,6 +1,6 @@
-# TaskX
-A CLI based User Task Planner coded in C Language including User Management, Authorization
-and the core logic of a Task Planner.
+# User Management System
+A CLI based User-Management-System coded in C Language including User Management, Authorization
+and the core logic of a To-Do-List.
 
 ## Functionality
 On compiling the program, we get 2 options, to :
@@ -8,11 +8,11 @@ On compiling the program, we get 2 options, to :
 2. Register
 3. Exit
 
-When the users login to their account, they get the option to 
-add tasks to their list one by one.
-
-Also, the tasks can be marked as completed when needed and removed
-from the List.
+When users login to the platform, they get the following options : 
+1. Add task
+2. View Tasks
+3. Mark a task as complete
+4. Remove a task
 
 New Users can register on the Platform by providing a unique username and a password.
 
