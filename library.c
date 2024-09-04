@@ -175,6 +175,7 @@ void register_user(){
         perror("Error creating user file\n");
         return;
     }
+    fprintf(user_file, "%d,%d", 0, 0);
     printf("\nDo you wish to sign in or exit ?\n");
     printf("Enter 's' to sign in\n");
     printf("Enter 'e' to exit\n");
