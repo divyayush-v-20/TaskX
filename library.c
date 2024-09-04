@@ -6,6 +6,7 @@
 #include <string.h>
 #include <conio.h>
 #include "tasks.h"
+#include "security/encryption.h"
 
 void disable_echo() {
     HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE); 
@@ -135,6 +136,7 @@ void register_user(){
         printf("Enter 'CTLR + C' if you wish to exit\n");
         printf("\nUsername : ");
         scanf("%s", username);
+        getchar();
     }
     printf("Password : ");
     disable_echo();
@@ -157,8 +159,8 @@ void register_user(){
     }
     
     //adding the credentials to credentials.txt
-    FILE* cred = fopen("credentials.txt", "a");
-    fprintf(cred, "%s,%s\n", username, password);
+    FILE* cred = fopen("cred_encr.txt", "a");
+    fprintf(cred, "%s,%s\n", encode(username), encode(password));
     userData* data = set_data(username, password);
     root = insert_data(root, data);
     fclose(cred);
@@ -167,7 +169,7 @@ void register_user(){
     const char* folder_name = "user_files";
     // const char* file_name = ("%s.txt", username);
     char path[256];
-    snprintf(path, sizeof(path), "%s/%s.txt", folder_name, username);
+    snprintf(path, sizeof(path), "%s/%s.txt", folder_name, decode(username));
     FILE* user_file = fopen(path, "a");
     if(user_file == NULL){
         perror("Error creating user file\n");
@@ -202,14 +204,16 @@ void init_program(){
     char line[71];
     char* username = (char*)malloc(20);
     char* password = (char*)malloc(20);
-    FILE* cred = fopen("credentials.txt", "r");
+    // FILE* cred = fopen("credentials.txt", "r");
+    FILE* new_cred = fopen("cred_encr.txt", "r");
     userData* data = NULL;
-    while(fgets(line, sizeof(line), cred)){
+    while(fgets(line, sizeof(line), new_cred)){
         sscanf(line, "%[^,],%s", username, password);
-        data = set_data(username, password);
+        data = set_data(decode(username), decode(password));
+        // fprintf(new_cred, "%s,%s\n", encode(username), encode(password));
         root = insert_data(root, data);
     }
-
+    getInorder(root);
     free(data);
 
     // getInorder(root);
