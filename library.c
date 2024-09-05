@@ -175,25 +175,27 @@ void register_user(){
         perror("Error creating user file\n");
         return;
     }
-    fprintf(user_file, "%d,%d", 0, 0);
-    printf("\nDo you wish to sign in or exit ?\n");
-    printf("Enter 's' to sign in\n");
-    printf("Enter 'e' to exit\n");
-    char op;
-    printf("Enter here : ");
-    scanf("%c", &op);
-    getchar();
-    while(op != 's' && op != 'e'){
-        printf("\nInvalid input, enter again\n");
-        printf("\nEnter Here : ");
-        scanf("%c", &op);
-        getchar();
-    }
-    if(op == 's') login_user();
-    if(op == 'e') return;
-    else{
-        return;
-    }
+    // fprintf(user_file, "%d,%d", 0, 0);
+    // printf("\nDo you wish to sign in or exit ?\n");
+    // printf("Enter 's' to sign in\n");
+    // printf("Enter 'e' to exit\n");
+    // char op;
+    // printf("Enter here : ");
+    // scanf("%c", &op);
+    // getchar();
+    // while(op != 's' && op != 'e'){
+    //     printf("\nInvalid input, enter again\n");
+    //     printf("\nEnter Here : ");
+    //     scanf("%c", &op);
+    //     getchar();
+    // }
+    // if(op == 's') login_user(true);
+    // if(op == 'e') return;
+    // else{
+    //     return;
+    // }
+
+    printf("Registration Successful\nTerminating Program\nRestart the Program to Sign-In\n");
     fclose(user_file);
     free(username);
     free(password);
@@ -242,8 +244,12 @@ void init_program(){
         register_user();
     }
     else if(op == 's' || op == 'S'){
-        login_user();
+        login_user(false);
     }
     free(username);
     free(password);
+}
+
+void load_data(){
+
 }
