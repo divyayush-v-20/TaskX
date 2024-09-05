@@ -4,7 +4,7 @@ add, view, and manage tasks efficiently. The program allows for user registratio
 authentication, ensuring that each user's tasks are securely managed.
 
 ## Key Features
-- **User Registration & Authentication:** Users can register with a username and a password. Credentials are securely encoded and stored, and users can login in multiple sessions. <br>
+- **_User Registration & Authentication:_** Users can register with a username and a password. Credentials are securely encoded and stored, and users can login in multiple sessions. <br>
 - **Task Management:** Users can:
     - Add new tasks
     - View existing tasks
