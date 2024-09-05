@@ -103,6 +103,7 @@ void login_user(){
             scanf("%s", password);
             enable_echo();
         }
+        printf("\n\nHey %s, Welcome!\n", username);
         welcome_user(username);
     }
     free(username);
@@ -257,10 +258,8 @@ void init_program(){
     printf("\nEnter Here : ");
     scanf("%c", &op);
     getchar();
-    while(op != 's' && op != 'r' && op != 'e'){
-        printf("\nInvalid option, re-enter : ");
-        scanf("%c", &op);
-        getchar();
+    if(!(op == 's' && op == 'r' && op == 'e')){
+        printf("\nInvalid option, program terminating...\n\n");
     }
     if(op == 'e' || op == 'E') {
         printf("\nProgram Terminating...");

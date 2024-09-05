@@ -3,6 +3,9 @@ r,play valorant
 r,finish C project
 r,initiate web project
 r,refresh
-play valorant
-r,initiate web project
+r,play valorant
+r,r,initiate web project
 go for a walk
+complete C Project
+initiate Web project
+revise concepts

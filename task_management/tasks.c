@@ -16,7 +16,6 @@ void welcome_user(char* username){
     snprintf(path, sizeof(path), "user_files/%s.txt", username);
     user_file = fopen(path, "a");
 
-    printf("\n\nHey %s, Welcome!\n", username);
     printf("\nSelect how do you want to proceed : \n");
     printf("Enter 'a' to add a task\n");
     printf("Enter 'v' to view all tasks\n");
@@ -28,6 +27,10 @@ void welcome_user(char* username){
     scanf("%c", &op);
     getchar();
 
+    if(!(op == 'a' || op == 'v' || op == 'r')){
+        printf("\nInvalid input, program terminating...\n\n");
+        return;
+    }
     switch(op){
         case 'a':
         add_task(username, user_file);
@@ -49,7 +52,10 @@ void continue_flow(char* username){
     scanf("%c", &op);
     // getchar();
     if(op == 'y') welcome_user(username);
-    else return;
+    else{
+        printf("\nTerminating Program...\n");
+        return;
+    }
 }
 
 void add_task(char* username, FILE* user_file){
