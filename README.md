@@ -14,7 +14,7 @@ authentication, ensuring that each user's tasks are securely managed.
 `char*, char*`, which stores `username, password`.<br>
 - **Dynamic Memory Allocation:** The project includes *dynamic memory allocation* at majority of the portions, which ensures smooth interaction between the file system and in-memory data structure (BST) for efficient task handling.<br>
 
-## How to Run this in your system ? 
+## Installation
 Clone this repository in your device using the following commands :  <br><br>
 ```
 git clone https://github.com/divyayush-v-20/User-Management-System
