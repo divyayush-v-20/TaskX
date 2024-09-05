@@ -1,7 +1,5 @@
 #include <stdio.h>
-#include "library.h"
-#include "data_structure/bst.h"
-#include "tasks.h"
+#include "user_management/user.h"
 int main(){
     init_program();
     return 0;

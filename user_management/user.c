@@ -1,12 +1,12 @@
 #include <stdbool.h>
-#include "data_structure/bst.h"
-#include "library.h"
+#include "../data_structure/bst.h"
+#include "user.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <conio.h>
-#include "tasks.h"
-#include "security/encryption.h"
+#include "../task_management/tasks.h"
+#include "../security/encryption.h"
 
 void disable_echo() {
     HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE); 
@@ -138,26 +138,52 @@ void register_user(){
         scanf("%s", username);
         getchar();
     }
-    printf("Password : ");
-    disable_echo();
-    scanf("%[^\n]", password);
-    getchar();
-    enable_echo();
+    // printf("Password : ");
+    // disable_echo();
+    // scanf("%[^\n]", password);
+    // getchar();
+    // enable_echo();
+    // // while(!validate_password(password)){
+    // //     printf("Password cannot contain spaces, please re-enter your password.\n");
+    // //     printf("Password : ");
+    // //     scanf("%[^\n]", password);
+    // //     getchar();
+    // // }
     // while(!validate_password(password)){
-    //     printf("Password cannot contain spaces, please re-enter your password.\n");
+    //     printf("The password you entered does not match the security requirements\nEnter a new password with all the given constraints\n");
     //     printf("Password : ");
+    //     disable_echo();
     //     scanf("%[^\n]", password);
     //     getchar();
+    //     enable_echo();
     // }
-    while(!validate_password(password)){
-        printf("The password you entered does not match the security requirements\nEnter a new password with all the given constraints\n");
+    char* confirm_password = (char *)malloc(20);
+    while(true){
         printf("Password : ");
         disable_echo();
         scanf("%[^\n]", password);
         getchar();
         enable_echo();
+        while(!validate_password(password)){
+            printf("The password you entered does not match the security requirements\nEnter a new password with all the given constraints\n");
+            printf("Password : ");
+            disable_echo();
+            scanf("%[^\n]", password);
+            getchar();
+            enable_echo();
+        }
+        printf("Confirm Password : ");
+        disable_echo();
+        scanf("%[^\n]", confirm_password);
+        getchar();
+        enable_echo();
+
+        if(strcmp(password, confirm_password) == 0) break;
+        else{
+            printf("\nPasswords do not match, re-enter password\n");
+        }
     }
-    
+
     //adding the credentials to credentials.txt
     FILE* cred = fopen("cred_encr.txt", "a");
     fprintf(cred, "%s,%s\n", encode(username), encode(password));
