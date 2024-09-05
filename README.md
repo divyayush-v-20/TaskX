@@ -1,6 +1,6 @@
 # User Management System
-A CLI based User-Management-System coded in C Language including User Management, Authorization
-and the core logic of a To-Do-List.
+This project is a simple Task Management System written in C, designed to help users add, view, and manage tasks efficiently.
+The program allows for user registration and authentication, ensuring that each user's tasks are securely managed.
 
 ## Functionality
 On compiling the program, we get 3 options, to :
@@ -32,8 +32,8 @@ cd User-Management-System
 <br><br>
 Run the following commands in the terminal: <br> <br>
 ```
-1. gcc main.c -o ex -L. library.a
-2. ./ex
+gcc main.c -o ex -L. library.a
+./ex
 ```
 <br><br>
 And you are ready to go!
