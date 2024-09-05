@@ -31,6 +31,9 @@ cd User-Management-System
 ```
 <br><br>
 Run the following commands in the terminal: <br> <br>
-1. `gcc main.c -o ex -L. library.a`<br> <br>
-2. `./ex`<br> <br>
+```
+1. gcc main.c -o ex -L. library.a
+2. ./ex
+```
+<br><br>
 And you are ready to go!
