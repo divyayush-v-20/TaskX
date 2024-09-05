@@ -1,28 +1,18 @@
 # User Management System
-This project is a simple Task Management System written in C, designed to help users <br>
-add, view, and manage tasks efficiently. The program allows for user registration and <br>
+This project is a simple Task Management System written in C, designed to help users
+add, view, and manage tasks efficiently. The program allows for user registration and
 authentication, ensuring that each user's tasks are securely managed.
 
-## Functionality
-On compiling the program, we get 3 options, to :
-1. Login
-2. Register
-3. Exit
-
-When users login to the platform, they get the following options : 
-1. Add task
-2. View Tasks
-3. Remove a task
-
-New Users can register on the Platform by providing a unique username and a password.
-
-## Redundancy Check
-When a new users creates an account, the program ensures that he selects a unique 
-username which is not taken by anyone else.
-
-## Password Strength Checker
-Programs informs registering users if their password is weak, or does not
-follow proper guidelines.
+## Key Features
+- **User Registration & Authentication:** Users can register with a username and a password. Credentials are securely encoded and stored, and users can login in multiple sessions.
+- **Task Management:** Users can:
+    - Add new tasks
+    - View existing tasks
+    - Remove tasks
+- **File-based Storage:** Tasks and user credentials are stored in plain text files, making it easy to maintain data across sessions. Each user has their own task file, in the format `username.txt`.
+- **Optimized Searching:** A Binary-Search-Tree is used to store sessional data, providing a logarithmic searching time during a session. The nodes of the tree are of the type
+`char*, char*`, which stores `username, password`.
+- **Dynamic Memory Allocation:** The project includes *dynamic memory allocation* at majority of the portions, which ensures smooth interaction between the file system and in-memory data structure (BST) for efficient task handling.
 
 ## How to Run this in your system ? 
 Clone this repository in your device using the following commands :  <br><br>
