@@ -3,7 +3,7 @@ A CLI based User-Management-System coded in C Language including User Management
 and the core logic of a To-Do-List.
 
 ## Functionality
-On compiling the program, we get 2 options, to :
+On compiling the program, we get 3 options, to :
 1. Login
 2. Register
 3. Exit
@@ -11,8 +11,7 @@ On compiling the program, we get 2 options, to :
 When users login to the platform, they get the following options : 
 1. Add task
 2. View Tasks
-3. Mark a task as complete
-4. Remove a task
+3. Remove a task
 
 New Users can register on the Platform by providing a unique username and a password.
 
@@ -25,7 +24,12 @@ Programs informs registering users if their password is weak, or does not
 follow proper guidelines.
 
 ## How to Run this in your system ? 
-Clone this repository in your device.
+Clone this repository in your device using the following commands :  <br><br>
+```
+git clone https://github.com/divyayush-v-20/User-Management-System
+cd User-Management-System
+```
+<br><br>
 Run the following commands in the terminal: <br> <br>
 1. `gcc main.c -o ex -L. library.a`<br> <br>
 2. `./ex`<br> <br>
