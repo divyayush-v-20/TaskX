@@ -22,6 +22,7 @@ cd User-Management-System
 ```
 <br>
 Run the following commands in the terminal: <br> 
+
 ```
 gcc main.c -o ex -L. library.a
 ./ex
