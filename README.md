@@ -1,6 +1,7 @@
 # User Management System
-This project is a simple Task Management System written in C, designed to help users add, view, and manage tasks efficiently.
-The program allows for user registration and authentication, ensuring that each user's tasks are securely managed.
+This project is a simple Task Management System written in C, designed to help users
+add, view, and manage tasks efficiently. The program allows for user registration and
+authentication, ensuring that each user's tasks are securely managed.
 
 ## Functionality
 On compiling the program, we get 3 options, to :
