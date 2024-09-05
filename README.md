@@ -23,3 +23,10 @@ username which is not taken by anyone else.
 ## Password Strength Checker
 Programs informs registering users if their password is weak, or does not
 follow proper guidelines.
+
+## How to Run this in your system ? 
+Clone this repository in your device.
+Run the following commands in the terminal:
+`gcc main.c -o ex -L. library.a`
+`./ex`
+And you are ready to go!
