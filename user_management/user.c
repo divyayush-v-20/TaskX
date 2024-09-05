@@ -173,7 +173,7 @@ void register_user(){
             getchar();
             enable_echo();
         }
-        printf("Confirm Password : ");
+        printf("\nConfirm Password : ");
         disable_echo();
         scanf("%[^\n]", confirm_password);
         getchar();
@@ -222,7 +222,7 @@ void register_user(){
     //     return;
     // }
 
-    printf("Registration Successful\nTerminating Program\nRestart the Program to Sign-In\n");
+    printf("\n\nRegistration Successful\nTerminating Program\nRestart the Program to Sign-In\n");
     fclose(user_file);
     free(username);
     free(password);
@@ -258,7 +258,7 @@ void init_program(){
     printf("\nEnter Here : ");
     scanf("%c", &op);
     getchar();
-    if(!(op == 's' && op == 'r' && op == 'e')){
+    if(!(op == 's' || op == 'r' || op == 'e')){
         printf("\nInvalid option, program terminating...\n\n");
     }
     if(op == 'e' || op == 'E') {
