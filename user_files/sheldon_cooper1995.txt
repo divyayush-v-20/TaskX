@@ -1,4 +1,5 @@
-0,0
-go to the comic book store,0
-watch star wars,0
-handover Penny's mails to her,0
+play halo
+r,go for a walk
+r,go to the comic book store
+go to cheesecake factory
+eat hamburger                                                                                                                                                                                                                                  

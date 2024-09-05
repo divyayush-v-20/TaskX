@@ -1,6 +1,12 @@
 #include "tasks.h"
 #include "library.h"
+#include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
 #include <stdio.h>
+#include <unistd.h>
+
+#define MAX_LINE_LENGTH 256
 
 void welcome_user(char* username){
     getchar();
@@ -14,7 +20,6 @@ void welcome_user(char* username){
     printf("\nSelect how do you want to proceed : \n");
     printf("Enter 'a' to add a task\n");
     printf("Enter 'v' to view all tasks\n");
-    printf("Enter 'm' to mark a task as complete\n");
     printf("Enter 'r' to remove/delete a task\n");
 
     printf("\nEnter here : ");
@@ -32,49 +37,37 @@ void welcome_user(char* username){
         view_tasks(username);
         break;
 
-        case 'm':
-        mark_as_completed(username, user_file);
-        break;
-
         case 'r':
-        remove_task(username, user_file);
+        remove_task(username);
     }
 }
 
-void updateCounters(int* marked, int* completed, char* username){
-    char* path = (char*)malloc(256);
-    snprintf(path, sizeof(path), "user_files/%s.txt", username);
-    FILE* user_file = fopen(path, "r+");
-
-    fprintf(user_file, "%d,%d\n", marked, completed);
-    free(path);
-    fclose(user_file);
-}
-
-void readCounters(int* marked, int* completed, FILE* user_file){
-    rewind(user_file);
-    fscanf(user_file, "%d,%d\n", marked, completed);
+void continue_flow(char* username){
+    printf("Do you wish to continue ?\n");
+    printf("Enter[y/n] : ");
+    char op;
+    scanf("%c", &op);
+    // getchar();
+    if(op == 'y') welcome_user(username);
+    else return;
 }
 
 void add_task(char* username, FILE* user_file){
-    int marked, completed;
-    readCounters(&marked, &completed, user_file);
-    ++marked;
-
     printf("Enter task here : ");
     char* task = (char*)malloc(256);
     scanf("%[^\n]", task);
     getchar();
 
-    fprintf(user_file, "\n%s,0", task);
-    updateCounters(&marked, &completed, username);
+    fprintf(user_file, "%s\n", task);
     free(task);
 
     printf("\nTask added successfully!\n");
+    fclose(user_file);
+    continue_flow(username);
 }
 
 void view_tasks(char* username){
-    printf("\nYour tasks and their completion status is as follows\n\n");
+    printf("\nYour tasks are as follows\n\n");
     FILE* user_file;
     char path[256];
     snprintf(path, sizeof(path), "user_files/%s.txt", username);
@@ -83,26 +76,95 @@ void view_tasks(char* username){
     // printf("entered view function\n");
 
     char task[256];
-    bool startPrinting = false;
     int counter = 1;
     while(fgets(task, sizeof(task), user_file) != NULL){
-
-        char* description = (char*)malloc(256);
-        int status;
-        sscanf(task, "%[^,],%d", description, &status);
-        if(startPrinting){
-            printf("%d. %s - %s\n", counter++, description, status == 0 ? "Pending" : "Completed");
+        if(task[0] == 'r' && task[1] == ',') continue;
+        else {
+            printf("%d. %s\n",counter++, task);
         }
-        startPrinting = true;
-        
+    }
+    continue_flow(username);
+}
+
+void view_tasks_func(char* username){
+    printf("\nYour tasks are as follows\n\n");
+    FILE* user_file;
+    char path[256];
+    snprintf(path, sizeof(path), "user_files/%s.txt", username);
+    user_file = fopen(path, "r");
+
+    // printf("entered view function\n");
+
+    char task[256];
+    int counter = 1;
+    while(fgets(task, sizeof(task), user_file) != NULL){
+        if(task[0] == 'r' && task[1] == ',') continue;
+        else {
+            printf("%d. %s\n",counter, task);
+            counter++;
+        }
     }
 }
 
-void mark_as_completed(char* username, FILE* user_file){
+void remove_task(char* username) {
+    char user_file[MAX_LINE_LENGTH];
+    snprintf(user_file, sizeof(user_file), "user_files/%s.txt", username);
 
+    FILE *file = fopen(user_file, "r+");
+    if (file == NULL) {
+        perror("Error opening file");
+        exit(EXIT_FAILURE);
+    }
+
+    view_tasks_func(username);
+    int line_no;
+    printf("Enter the task no. that you wish to remove\n");
+    printf("Enter Here : ");
+    scanf("%d", &line_no);
+    getchar();
+
+    char buffer[MAX_LINE_LENGTH];
+    char modified_line[MAX_LINE_LENGTH + 2]; 
+    int current_line = 0;
+    long line_start_position = -1;
+
+    FILE *temp_file = tmpfile();
+    if (temp_file == NULL) {
+        perror("Error creating temporary file");
+        fclose(file);
+        exit(EXIT_FAILURE);
+    }
+
+    while (fgets(buffer, sizeof(buffer), file)) {
+        if(buffer[1] != ',') current_line++;
+        if (current_line == line_no) {
+            size_t len = strlen(buffer);
+            if (len > 0 && buffer[len - 1] == '\n') {
+                buffer[len - 1] = '\0';
+            }
+
+            snprintf(modified_line, sizeof(modified_line), "r,%s\n", buffer);
+            fputs(modified_line, temp_file);
+        } else {
+            fputs(buffer, temp_file);
+        }
+
+    }
+
+    fclose(file);
+    file = fopen(user_file, "w");
+    if (file == NULL) {
+        perror("Error opening file for writing");
+        exit(EXIT_FAILURE);
+    }
+
+    rewind(temp_file);
+    while (fgets(buffer, sizeof(buffer), temp_file)) {
+        fputs(buffer, file);
+    }
+
+    fclose(temp_file);
+    fclose(file);
+
+    continue_flow(username);
 }
-
-void remove_task(char* username, FILE* user_file){
-
-}
-

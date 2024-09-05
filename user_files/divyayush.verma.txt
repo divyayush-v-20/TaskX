@@ -1,1 +1,8 @@
-0,0
+r,study
+r,play valorant
+r,finish C project
+r,initiate web project
+r,refresh
+play valorant
+r,initiate web project
+go for a walk
