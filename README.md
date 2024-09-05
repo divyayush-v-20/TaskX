@@ -26,7 +26,7 @@ follow proper guidelines.
 
 ## How to Run this in your system ? 
 Clone this repository in your device.
-Run the following commands in the terminal:
-`gcc main.c -o ex -L. library.a`
-`./ex`
+Run the following commands in the terminal: <br>
+`gcc main.c -o ex -L. library.a`<br>
+`./ex`<br>
 And you are ready to go!
