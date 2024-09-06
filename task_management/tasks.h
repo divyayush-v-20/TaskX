@@ -12,3 +12,5 @@ void remove_task(char* username);
 void continue_flow(char* username);
 
 void view_tasks_func(char* username);
+
+bool isFileEmpty(char* username);

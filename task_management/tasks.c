@@ -9,7 +9,7 @@
 #define MAX_LINE_LENGTH 256
 
 void welcome_user(char* username){
-    getchar();
+    // getchar();
 
     FILE* user_file;
     char path[256];
@@ -55,12 +55,39 @@ void welcome_user(char* username){
     }
 }
 
+bool isFileEmpty(char* username){
+    char* path = (char *)malloc(256);
+    snprintf(path, 256, "user_files/%s.txt", username);
+    FILE* file = fopen(path, "r");
+    free(path);
+
+    char* buffer = (char *)malloc(256);
+    while(fgets(buffer, 256, file)){
+        if(buffer[1] == ',') continue;
+        else if(buffer[0] != ' ' && buffer[0] != '\0') return false;
+    }
+    free(buffer);
+    fclose(file);
+    return true;
+}
+
 void continue_flow(char* username){
     printf("Do you wish to continue ?\n");
-    printf("Enter[y/n] : ");
+    char* str = (char *)malloc(50);
     char op;
-    scanf("%c", &op);
-    // getchar();
+    while(true){
+        printf("Enter[y/n] : ");
+        scanf("%[^\n]", str);
+        getchar();
+        op = first_char(str);
+
+        if((op == 'y' || op == 'n') && char_count(str) == 1) break;
+        else{
+            printf("\nInvalid selection, try again\n");
+        }
+    }
+    free(str);
+
     if(op == 'y') welcome_user(username);
     else{
         printf("\nTerminating Program...\n");
@@ -88,20 +115,26 @@ void add_task(char* username, FILE* user_file){
 
 
 void view_tasks(char* username){
-    printf("\nYour tasks are as follows\n\n");
-    FILE* user_file;
-    char path[256];
-    snprintf(path, sizeof(path), "user_files/%s.txt", username);
-    user_file = fopen(path, "r");
+    if(isFileEmpty(username)){
+        printf("\nNo tasks added\n\n");
+    }
+    else{
+        FILE* user_file;
+        char path[256];
+        snprintf(path, sizeof(path), "user_files/%s.txt", username);
+        user_file = fopen(path, "r");
 
-    // printf("entered view function\n");
+            // printf("entered view function\n");
 
-    char task[256];
-    int counter = 1;
-    while(fgets(task, sizeof(task), user_file) != NULL){
-        if(task[0] == 'r' && task[1] == ',') continue;
-        else {
-            printf("%d. %s\n",counter++, task);
+        char task[256];
+        int counter = 0;
+        while(fgets(task, sizeof(task), user_file) != NULL){
+            if((task[0] == 'r' && task[1] == ',') || task[0] == ' ' || task[0] == '\0') continue;
+            else {
+                counter++;
+                if(counter == 1) printf("\nYour tasks are as follows:\n\n");
+                printf("%d. %s\n",counter, task);
+            }
         }
     }
     continue_flow(username);
@@ -110,21 +143,24 @@ void view_tasks(char* username){
 //function for viewing tasks 
 
 void view_tasks_func(char* username){
-    printf("\nYour tasks are as follows\n\n");
-    FILE* user_file;
-    char path[256];
-    snprintf(path, sizeof(path), "user_files/%s.txt", username);
-    user_file = fopen(path, "r");
+    if(isFileEmpty(username)){
+        printf("\nNo tasks added\n\n");
+    }
+    else{
+        FILE* user_file;
+        char path[256];
+        snprintf(path, sizeof(path), "user_files/%s.txt", username);
+        user_file = fopen(path, "r");
 
-    // printf("entered view function\n");
-
-    char task[256];
-    int counter = 1;
-    while(fgets(task, sizeof(task), user_file) != NULL){
-        if(task[0] == 'r' && task[1] == ',') continue;
-        else {
-            printf("%d. %s\n",counter, task);
-            counter++;
+        char task[256];
+        int counter = 1;
+        while(fgets(task, sizeof(task), user_file) != NULL){
+            if((task[0] == 'r' && task[1] == ',') || task[0] == ' ' || task[0] == '\0') continue;
+            else {
+                if(counter == 1) printf("\nYour tasks are as follows:\n\n");
+                printf("%d. %s\n",counter, task);
+                counter++;
+            }
         }
     }
 }

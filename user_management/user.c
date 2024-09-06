@@ -116,6 +116,7 @@ void login_user(){
             enable_echo();
         }
         printf("\n\nHey %s, Welcome!\n", username);
+        getchar();
         welcome_user(username);
     }
     free(username);
