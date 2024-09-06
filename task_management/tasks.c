@@ -58,6 +58,8 @@ void continue_flow(char* username){
     }
 }
 
+//function for adding tasks
+
 void add_task(char* username, FILE* user_file){
     printf("Enter task here : ");
     char* task = (char*)malloc(256);
@@ -71,6 +73,9 @@ void add_task(char* username, FILE* user_file){
     fclose(user_file);
     continue_flow(username);
 }
+
+//function for viewing tasks 
+
 
 void view_tasks(char* username){
     printf("\nYour tasks are as follows\n\n");
@@ -92,6 +97,8 @@ void view_tasks(char* username){
     continue_flow(username);
 }
 
+//function for viewing tasks 
+
 void view_tasks_func(char* username){
     printf("\nYour tasks are as follows\n\n");
     FILE* user_file;
@@ -111,6 +118,8 @@ void view_tasks_func(char* username){
         }
     }
 }
+
+//function for removing a task
 
 void remove_task(char* username) {
     char user_file[MAX_LINE_LENGTH];

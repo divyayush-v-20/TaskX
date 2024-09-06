@@ -11,18 +11,14 @@
 void disable_echo() {
     HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE); 
     DWORD mode;
-
     GetConsoleMode(hStdin, &mode);
-
     SetConsoleMode(hStdin, mode & ~(ENABLE_ECHO_INPUT));
 }
 
 void enable_echo() {
     HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE); 
     DWORD mode;
-
     GetConsoleMode(hStdin, &mode);
-
     SetConsoleMode(hStdin, mode | ENABLE_ECHO_INPUT);
 }
 
@@ -39,7 +35,6 @@ bool isValidUsername(char* input){
     for(int i = 0; i < strlen(input); i++){
         if(input[i] == ' ') return false;
     }
-    // int len = strlen(input);
     return true;
 }
 
@@ -86,11 +81,9 @@ void login_user(){
     userData* data = get_node_data(root, username);
     if(data == NULL){
         printf("The username you entered is not valid, try again\n");
-        // printf("Enter 't' to try again, or 'r' if you wish to register\n");
         login_user();
     }
     else{
-        // char password[20];
         printf("Password : ");
         disable_echo();
         scanf("%s", password);
@@ -123,7 +116,6 @@ void register_user(){
     printf("\nUsername : ");
     scanf("%[^\n]", username);
     getchar();
-    // printf("%s", username);
 
     while(!isValidUsername(username)){
         printf("Username cannot contain spaces, please re-enter your username.\n");
@@ -139,25 +131,7 @@ void register_user(){
         scanf("%s", username);
         getchar();
     }
-    // printf("Password : ");
-    // disable_echo();
-    // scanf("%[^\n]", password);
-    // getchar();
-    // enable_echo();
-    // // while(!validate_password(password)){
-    // //     printf("Password cannot contain spaces, please re-enter your password.\n");
-    // //     printf("Password : ");
-    // //     scanf("%[^\n]", password);
-    // //     getchar();
-    // // }
-    // while(!validate_password(password)){
-    //     printf("The password you entered does not match the security requirements\nEnter a new password with all the given constraints\n");
-    //     printf("Password : ");
-    //     disable_echo();
-    //     scanf("%[^\n]", password);
-    //     getchar();
-    //     enable_echo();
-    // }
+
     char* confirm_password = (char *)malloc(20);
     while(true){
         printf("Password : ");
@@ -194,7 +168,6 @@ void register_user(){
 
     //creating a txt file for each user
     const char* folder_name = "user_files";
-    // const char* file_name = ("%s.txt", username);
     char path[256];
     snprintf(path, sizeof(path), "%s/%s.txt", folder_name, decode(username));
     FILE* user_file = fopen(path, "a");
@@ -202,26 +175,7 @@ void register_user(){
         perror("Error creating user file\n");
         return;
     }
-    // fprintf(user_file, "%d,%d", 0, 0);
-    // printf("\nDo you wish to sign in or exit ?\n");
-    // printf("Enter 's' to sign in\n");
-    // printf("Enter 'e' to exit\n");
-    // char op;
-    // printf("Enter here : ");
-    // scanf("%c", &op);
-    // getchar();
-    // while(op != 's' && op != 'e'){
-    //     printf("\nInvalid input, enter again\n");
-    //     printf("\nEnter Here : ");
-    //     scanf("%c", &op);
-    //     getchar();
-    // }
-    // if(op == 's') login_user(true);
-    // if(op == 'e') return;
-    // else{
-    //     return;
-    // }
-
+    
     printf("\n\nRegistration Successful\nTerminating Program\nRestart the Program to Sign-In\n");
     fclose(user_file);
     free(username);
@@ -234,21 +188,15 @@ void init_program(){
     char line[71];
     char* username = (char*)malloc(20);
     char* password = (char*)malloc(20);
-    // FILE* cred = fopen("credentials.txt", "r");
     FILE* new_cred = fopen("cred_encr.txt", "r");
     userData* data = NULL;
     while(fgets(line, sizeof(line), new_cred)){
         sscanf(line, "%[^,],%s", username, password);
         data = set_data(decode(username), decode(password));
-        // fprintf(new_cred, "%s,%s\n", encode(username), encode(password));
         root = insert_data(root, data);
     }
     // getInorder(root);
     free(data);
-
-    // getInorder(root);
-    // printf("\n");
-
 
     printf("\n\nWelcome to your Personalized Task Planner, how do you want to proceed\n");
     printf("Enter 's' to sign-in\n");
@@ -273,8 +221,4 @@ void init_program(){
     }
     free(username);
     free(password);
-}
-
-void load_data(){
-
 }

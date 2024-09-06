@@ -21,6 +21,4 @@ bool validate_password(char* password);
 
 void remove_newline(char* str);
 
-void load_data();
-
 userData* search_from_file(char* username);
