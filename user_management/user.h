@@ -21,4 +21,8 @@ bool validate_password(char* password);
 
 void remove_newline(char* str);
 
+char first_char(char* str);
+
+int char_count(char* str);
+
 userData* search_from_file(char* username);

@@ -45,6 +45,25 @@ void remove_newline(char* str) {
     }
 }
 
+char first_char(char* str){
+    bool flag = false;
+    for(int i = 0; i < strlen(str); i++){
+        if(str[i] != ' ') flag = true;
+        if(flag) return str[i];
+    }
+    return '\0';
+}
+
+int char_count(char* str){
+    bool flag = false;
+    int cnt = 0;
+    for(int i = 0; i < strlen(str); ++i){
+        if(str[i] != ' ') flag = true;
+        if(str[i] == ' ') flag = false;
+        if(flag) cnt++;
+    }
+    return cnt;
+}
 
 bool exists_user(char* username){
     if(search(root, username)) return true;
@@ -202,13 +221,25 @@ void init_program(){
     printf("Enter 's' to sign-in\n");
     printf("Enter 'r' to sign-up\n");
     printf("Enter 'e' to exit\n");
+
+
+    char* str = (char *)malloc(50);
     char op;
-    printf("\nEnter Here : ");
-    scanf("%c", &op);
-    getchar();
-    if(!(op == 's' || op == 'r' || op == 'e')){
-        printf("\nInvalid option, program terminating...\n\n");
+
+    // getchar();
+    while(true){
+        // !(op == 's' || op == 'r' || op == 'e')
+        printf("\nEnter Here : ");
+        scanf("%[^\n]", str);
+        getchar();
+        op = first_char(str);
+        if((op == 's' || op == 'r' || op == 'e') && char_count(str) == 1) break;
+        else{
+            printf("\nInvalid selection, enter again\n");
+        }
     }
+    free(str);
+
     if(op == 'e' || op == 'E') {
         printf("\nProgram Terminating...");
         return;
@@ -222,3 +253,12 @@ void init_program(){
     free(username);
     free(password);
 }
+
+// gcc -c data_structure/bst.c -o executables/bst
+// gcc -c security/encryption.c -o executables/enc
+// gcc -c task_management/tasks.c -o executables/tsk
+// gcc -c user_management/user.c -o executables/usr
+
+// ar rcs library.a executables/bst executables/tsk executables/usr executables/enc
+
+// gcc main.c -o ex -L. library.a

@@ -21,16 +21,26 @@ void welcome_user(char* username){
     printf("Enter 'v' to view all tasks\n");
     printf("Enter 'r' to remove/delete a task\n");
 
-    printf("\nEnter here : ");
-
     char op;
-    scanf("%c", &op);
-    getchar();
+    char* str = (char *)malloc(50);
+    while(true){
+        printf("\nEnter here : ");
 
-    if(!(op == 'a' || op == 'v' || op == 'r')){
-        printf("\nInvalid input, program terminating...\n\n");
-        return;
+        scanf("%[^\n]", str);
+        getchar();
+        op = first_char(str);
+
+        if((op == 'a' || op == 'v' || op == 'r') && char_count(str) == 1) break;
+
+        printf("\nInvalid selection, enter again\n");
     }
+    // scanf("%c", &op);
+    // getchar();
+
+    // if(!(op == 'a' || op == 'v' || op == 'r')){
+    //     printf("\nInvalid input, program terminating...\n\n");
+    //     return;
+    // }
     switch(op){
         case 'a':
         add_task(username, user_file);
