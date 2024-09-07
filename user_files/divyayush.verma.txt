@@ -1,14 +1,8 @@
-r,study
-r,play valorant
-r,finish C project
-r,initiate web project
-r,refresh
-r,play valorant
-r,r,initiate web project
+finish C project
 go for a walk
-r,complete C Project
-initiate Web project
-revise concepts
-irst task
-À
-hello
+solve problems on leetcode
+play valorant with the squad XD
+initiate web project
+buy groceries
+revise OS           
+new task

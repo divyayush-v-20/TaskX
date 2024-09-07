@@ -1,5 +1,5 @@
 play halo
-r,go for a walk
-r,go to the comic book store
+go for a walk
+go to the comic book store
 go to cheesecake factory
 eat hamburger                                                                                                                                                                                                                                  
