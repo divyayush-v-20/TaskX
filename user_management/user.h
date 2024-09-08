@@ -1,5 +1,4 @@
 #include <stdbool.h>
-#include <windows.h>
 
 void disable_echo();
 
